@@ -16,7 +16,11 @@ public class AccidentService {
         return rep.findAll();
     }
 
-    public Accident create(Accident accident) {
-        return rep.create(accident);
+    public Accident save(Accident accident) {
+        return rep.save(accident);
+    }
+
+    public Accident findById(int id) {
+        return rep.findById(id);
     }
 }

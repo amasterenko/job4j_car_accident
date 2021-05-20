@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
             integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Car accident</title>
 </head>
 <body>
@@ -39,6 +40,7 @@
                     <th>Name</th>
                     <th>Text</th>
                     <th>Address</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,9 @@
                     <td>${accident.getName()}</td>
                     <td>${accident.getText()}</td>
                     <td>${accident.getAddress()}</td>
+                    <td><a href='<c:url value="/update?id=${accident.id}"/>' title="Edit">
+                        <i class="fa fa-edit mr-3"></i>
+                    </a></td>
                 </tr>
                 </c:forEach>
             </table>
