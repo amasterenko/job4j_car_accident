@@ -15,4 +15,8 @@ public class AccidentService {
     public Collection<Accident> findAll() {
         return rep.findAll();
     }
+
+    public Accident create(Accident accident) {
+        return rep.create(accident);
+    }
 }

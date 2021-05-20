@@ -21,36 +21,24 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row p-4 text-center">
-        <div class="col text-center"><h4>Accidents:</h4></div>
-    </div>
     <div class="row p-4">
         <div class="col-md-6 offset-md-3">
-            <ul class="nav float-left">
-                <li class="nav-item active">
-                    <a class="nav-link" href="<c:url value='/create'/>">Create accident</a>
-                </li>
-            </ul>
-
-            <table class="table table-sm top-buffer text-center">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Text</th>
-                    <th>Address</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${accidents}" var="accident">
-                <tr>
-                    <td>${accident.getId()}</td>
-                    <td>${accident.getName()}</td>
-                    <td>${accident.getText()}</td>
-                    <td>${accident.getAddress()}</td>
-                </tr>
-                </c:forEach>
-            </table>
+            <div class="row p-4">
+                <div class="col text-center"><h4>New accident:</h4></div>
+            </div>
+            <div class="row justify-content-center">
+                <form action="<c:url value='/save'/>" method='POST'>
+                    <div class="row py-2">
+                        <div class="col">
+                            <label for="inputName" class="sr-only">Title</label>
+                            <input type="text" name="name" id="inputName" class="form-control"
+                                   placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="d-flex p-2"></div>
+                    <button class="btn btn-lg btn-outline-dark btn-block" id="submit" type="submit">Save</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

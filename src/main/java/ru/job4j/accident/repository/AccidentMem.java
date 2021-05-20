@@ -10,6 +10,7 @@ import java.util.Map;
 @Repository
 public class AccidentMem {
     private Map<Integer, Accident> accidents;
+    private int indx = 5;
 
     public AccidentMem() {
         this.accidents = new HashMap<>() {{
@@ -23,5 +24,11 @@ public class AccidentMem {
 
     public Collection<Accident> findAll() {
         return accidents.values();
+    }
+
+    public Accident create(Accident accident) {
+        accident.setId(indx++);
+        this.accidents.put(accident.getId(), accident);
+        return accident;
     }
 }
