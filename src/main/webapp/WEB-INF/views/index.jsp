@@ -40,6 +40,7 @@
                     <th>Name</th>
                     <th>Text</th>
                     <th>Address</th>
+                    <th>Type</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -50,6 +51,7 @@
                     <td>${accident.getName()}</td>
                     <td>${accident.getText()}</td>
                     <td>${accident.getAddress()}</td>
+                    <td>${accident.getType().getName()}</td>
                     <td><a href='<c:url value="/update?id=${accident.id}"/>' title="Edit">
                         <i class="fa fa-edit mr-3"></i>
                     </a></td>

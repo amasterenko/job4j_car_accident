@@ -35,8 +35,23 @@
                                    placeholder="Name">
                         </div>
                     </div>
-                    <div class="d-flex p-2"></div>
-                    <button class="btn btn-lg btn-outline-dark btn-block" id="submit" type="submit">Save</button>
+                    <div class="row py-2">
+                        <div class="col">
+                            <div class="form-group input-group-sm">
+                                <label for="selectType">Type</label>
+                                <select class="custom-select mr-sm-2" id="selectType" name="type.id">
+                                    <c:forEach var="type" items="${types}">
+                                        <option value="${type.id}">${type.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="d-flex p-2"></div>
+                            <button class="btn btn-lg btn-outline-dark btn-block" id="submit" type="submit">Save
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
