@@ -41,6 +41,7 @@
                     <th>Text</th>
                     <th>Address</th>
                     <th>Type</th>
+                    <th>Rule</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -52,6 +53,17 @@
                     <td>${accident.getText()}</td>
                     <td>${accident.getAddress()}</td>
                     <td>${accident.getType().getName()}</td>
+                    <td>
+                    <div class="btn-group dropright">
+                        <a class="btn btn-link dropdown-toggle align-middle" href="" role="button"
+                           id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <c:forEach items="${accident.getRules()}" var="rule">
+                            <a class="dropdown-item" href="">${rule.getName()}</a>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    </td>
                     <td><a href='<c:url value="/update?id=${accident.id}"/>' title="Edit">
                         <i class="fa fa-edit mr-3"></i>
                     </a></td>

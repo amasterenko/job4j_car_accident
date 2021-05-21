@@ -47,6 +47,16 @@
                                 <div>
                                 </div>
                             </div>
+                            <div class="form-group input-group-sm">
+                                <label for="selectRule">Rule</label>
+                                <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple>
+                                    <c:forEach var="rule" items="${rules}">
+                                        <option value="${rule.id}">${rule.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <div>
+                                </div>
+                            </div>
                             <div class="d-flex p-2"></div>
                             <button class="btn btn-lg btn-outline-dark btn-block" id="submit" type="submit">Save
                             </button>

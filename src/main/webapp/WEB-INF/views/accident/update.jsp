@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
 <head>
@@ -33,6 +34,28 @@
                             <label for="inputName" class="sr-only">Title</label>
                             <input type="text" value="<c:out value="${accident.name}"/>" name="name" id="inputName" class="form-control"
                                    placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group input-group-sm">
+                        <label for="selectType">Type</label>
+                        <select class="custom-select mr-sm-2" id="selectType" name="type.id">
+                            <c:forEach var="type" items="${types}">
+                                <option value="${type.id}"
+                                <c:if test="${type.id==accident.type.id}"> selected</c:if>>${type.name}</option>
+                            </c:forEach>
+                        </select>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="form-group input-group-sm">
+                        <label for="selectRule">Rule</label>
+                        <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple>
+                            <c:forEach var="rule" items="${rules}">
+                                <option value="${rule.id}"
+                                        <c:if test="${fn:contains(accident.rules,rule.id)}"> selected="selected"</c:if>>${rule.name}</option>
+                            </c:forEach>
+                        </select>
+                        <div>
                         </div>
                     </div>
                     <div class="d-flex p-2"></div>
