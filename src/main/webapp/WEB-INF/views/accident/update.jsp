@@ -31,9 +31,10 @@
                 <form action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
                     <div class="row py-2">
                         <div class="col">
-                            <label for="inputName" class="sr-only">Title</label>
-                            <input type="text" value="<c:out value="${accident.name}"/>" name="name" id="inputName" class="form-control"
-                                   placeholder="Name">
+                            <label for="inputName">Title</label>
+                            <input type="text" value="<c:out value="${accident.name}"/>" name="name" id="inputName"
+                                   class="form-control form-control-sm"
+                                   placeholder="New accident title">
                         </div>
                     </div>
                     <div class="form-group input-group-sm">

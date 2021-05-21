@@ -30,9 +30,9 @@
                 <form action="<c:url value='/save'/>" method='POST'>
                     <div class="row py-2">
                         <div class="col">
-                            <label for="inputName" class="sr-only">Title</label>
-                            <input type="text" name="name" id="inputName" class="form-control"
-                                   placeholder="Name">
+                            <label for="inputName">Title</label>
+                            <input type="text" name="name" id="inputName" class="form-control form-control-sm"
+                                   placeholder="New accident title">
                         </div>
                     </div>
                     <div class="row py-2">
