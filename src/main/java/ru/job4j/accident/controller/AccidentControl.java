@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentHibernate;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
 public class AccidentControl {
-    private final AccidentJdbcTemplate accidents;
+    private final AccidentHibernate accidents;
 
-    public AccidentControl(AccidentJdbcTemplate accidents) {
+    public AccidentControl(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
 
@@ -34,13 +37,14 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        int[] ruleIds = Stream.of(req.getParameterValues("rIds"))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        Set<Rule> rules = Stream.of(req.getParameterValues("rIds"))
+                .map(id -> Rule.of(Integer.parseInt(id), id))
+                .collect(Collectors.toSet());
+        accident.setRules(rules);
         if (accident.getId() == 0) {
-            accidents.save(accident, ruleIds);
+            accidents.save(accident);
         } else {
-            accidents.update(accident, ruleIds);
+            accidents.update(accident);
         }
         return "redirect:/";
     }

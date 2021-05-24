@@ -63,7 +63,7 @@
                                 <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple required>
                                     <c:forEach var="rule" items="${rules}">
                                         <option value="${rule.id}"
-                                                <c:if test="${fn:contains(accident.rules,rule.id)}"> selected="selected"</c:if>>${rule.name}</option>
+                                                <c:if test="${fn:contains(accident.rules,rule)}"> selected="selected"</c:if>>${rule.name}</option>
                                     </c:forEach>
                                 </select>
                                 <div>
