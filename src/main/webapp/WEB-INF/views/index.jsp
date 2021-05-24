@@ -37,11 +37,11 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Text</th>
+                    <th>Title</th>
                     <th>Address</th>
                     <th>Type</th>
                     <th>Rule</th>
+                    <th>Text</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -50,11 +50,10 @@
                 <tr>
                     <td>${accident.getId()}</td>
                     <td>${accident.getName()}</td>
-                    <td>${accident.getText()}</td>
                     <td>${accident.getAddress()}</td>
                     <td>${accident.getType().getName()}</td>
                     <td>
-                    <div class="btn-group dropright">
+                    <div class="btn-group">
                         <a class="btn btn-link dropdown-toggle align-middle" href="" role="button"
                            id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -64,6 +63,7 @@
                         </div>
                     </div>
                     </td>
+                    <td>${accident.getText()}</td>
                     <td><a href='<c:url value="/update?id=${accident.id}"/>' title="Edit">
                         <i class="fa fa-edit mr-3"></i>
                     </a></td>

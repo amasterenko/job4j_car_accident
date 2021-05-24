@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 public class AccidentService {
     private AccidentMem rep;
 
-    @Autowired
     public AccidentService(AccidentMem rep) {
         this.rep = rep;
     }

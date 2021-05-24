@@ -25,38 +25,54 @@
     <div class="row p-4">
         <div class="col-md-6 offset-md-3">
             <div class="row p-4">
-                <div class="col text-center"><h4>Edit accident:</h4></div>
+                <div class="col text-center"><h4>Edit accident #${accident.id}:</h4></div>
             </div>
             <div class="row justify-content-center">
-                <form action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
+                <form action="<c:url value='/save?id=${accident.id}'/>" method='POST' class="was-validated">
                     <div class="row py-2">
                         <div class="col">
                             <label for="inputName">Title</label>
                             <input type="text" value="<c:out value="${accident.name}"/>" name="name" id="inputName"
                                    class="form-control form-control-sm"
-                                   placeholder="New accident title">
+                                   placeholder="New accident title" required>
                         </div>
                     </div>
-                    <div class="form-group input-group-sm">
-                        <label for="selectType">Type</label>
-                        <select class="custom-select mr-sm-2" id="selectType" name="type.id">
-                            <c:forEach var="type" items="${types}">
-                                <option value="${type.id}"
-                                <c:if test="${type.id==accident.type.id}"> selected</c:if>>${type.name}</option>
-                            </c:forEach>
-                        </select>
-                        <div>
+                    <div class="row py-2">
+                        <div class="col">
+                            <label for="inputAddr">Address</label>
+                            <input type="text" name="address" id="inputAddr" class="form-control form-control-sm"
+                                   value="<c:out value="${accident.address}"/>" placeholder="Address of the accident"
+                                   required>
                         </div>
                     </div>
-                    <div class="form-group input-group-sm">
-                        <label for="selectRule">Rule</label>
-                        <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple>
-                            <c:forEach var="rule" items="${rules}">
-                                <option value="${rule.id}"
-                                        <c:if test="${fn:contains(accident.rules,rule.id)}"> selected="selected"</c:if>>${rule.name}</option>
-                            </c:forEach>
-                        </select>
-                        <div>
+                    <div class="row py-2">
+                        <div class="col">
+                            <div class="form-group input-group-sm">
+                                <label for="selectType">Type</label>
+                                <select class="custom-select mr-sm-2" id="selectType" name="type.id" required>
+                                    <c:forEach var="type" items="${types}">
+                                        <option value="${type.id}"
+                                                <c:if test="${type.id==accident.type.id}"> selected</c:if>>${type.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group-sm">
+                                <label for="selectRule">Rule</label>
+                                <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple required>
+                                    <c:forEach var="rule" items="${rules}">
+                                        <option value="${rule.id}"
+                                                <c:if test="${fn:contains(accident.rules,rule.id)}"> selected="selected"</c:if>>${rule.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <div>
+                                </div>
+                            </div>
+                            <label for="inputText">Description</label>
+                            <textarea class="form-control form-control-sm" rows=2 name="text" id="inputText"
+                                      placeholder="Description" required> <c:out value="${accident.text}"/>
+                            </textarea>
                         </div>
                     </div>
                     <div class="d-flex p-2"></div>

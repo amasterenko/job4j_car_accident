@@ -27,19 +27,26 @@
                 <div class="col text-center"><h4>New accident:</h4></div>
             </div>
             <div class="row justify-content-center">
-                <form action="<c:url value='/save'/>" method='POST'>
+                <form action="<c:url value='/save'/>" method='POST' class="was-validated">
                     <div class="row py-2">
                         <div class="col">
                             <label for="inputName">Title</label>
                             <input type="text" name="name" id="inputName" class="form-control form-control-sm"
-                                   placeholder="New accident title">
+                                   placeholder="New accident title" required>
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col">
+                            <label for="inputAddr">Address</label>
+                            <input type="text" name="address" id="inputAddr" class="form-control form-control-sm"
+                                   placeholder="Address of the accident" required>
                         </div>
                     </div>
                     <div class="row py-2">
                         <div class="col">
                             <div class="form-group input-group-sm">
                                 <label for="selectType">Type</label>
-                                <select class="custom-select mr-sm-2" id="selectType" name="type.id">
+                                <select class="custom-select mr-sm-2" id="selectType" name="type.id" required>
                                     <c:forEach var="type" items="${types}">
                                         <option value="${type.id}">${type.name}</option>
                                     </c:forEach>
@@ -49,7 +56,7 @@
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="selectRule">Rule</label>
-                                <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple>
+                                <select class="custom-select mr-sm-2" id="selectRule" name="rIds" multiple required>
                                     <c:forEach var="rule" items="${rules}">
                                         <option value="${rule.id}">${rule.name}</option>
                                     </c:forEach>
@@ -57,6 +64,9 @@
                                 <div>
                                 </div>
                             </div>
+                            <label for="inputText">Description</label>
+                            <textarea class="form-control form-control-sm" rows=2 name="text" id="inputText"
+                                      placeholder="Description" required></textarea>
                             <div class="d-flex p-2"></div>
                             <button class="btn btn-lg btn-outline-dark btn-block" id="submit" type="submit">Save
                             </button>
