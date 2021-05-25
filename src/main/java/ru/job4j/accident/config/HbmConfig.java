@@ -49,7 +49,7 @@ public class HbmConfig {
         return sessionFactory;
     }
 
-    @Bean
+    //@Bean
     public PlatformTransactionManager htx(SessionFactory sf) {
         HibernateTransactionManager tx = new HibernateTransactionManager();
         tx.setSessionFactory(sf);

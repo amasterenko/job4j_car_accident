@@ -1,6 +1,8 @@
 package ru.job4j.accident.controller;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,29 +11,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentHibernate;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
+import ru.job4j.accident.repository.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
 public class AccidentControl {
-    private final AccidentHibernate accidents;
+    private final AccidentRepository accidents;
+    private final TypeRepository types;
+    private final RuleRepository rules;
 
-    public AccidentControl(AccidentHibernate accidents) {
+    public AccidentControl(
+            AccidentRepository accidents,
+            TypeRepository types,
+            RuleRepository rules
+    ) {
         this.accidents = accidents;
+        this.types = types;
+        this.rules = rules;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        Collection<AccidentType> types = accidents.findAllTypes();
-        Collection<Rule> rules = accidents.findAllRules();
-        model.addAttribute("types", types);
-        model.addAttribute("rules", rules);
+        List<AccidentType> typesList = new ArrayList<>();
+        types.findAll().forEach(typesList::add);
+        List<Rule> rulesList = new ArrayList<>();
+        rules.findAll().forEach(rulesList::add);
+        model.addAttribute("types", typesList);
+        model.addAttribute("rules", rulesList);
         return "accident/create";
     }
 
@@ -41,21 +54,24 @@ public class AccidentControl {
                 .map(id -> Rule.of(Integer.parseInt(id), id))
                 .collect(Collectors.toSet());
         accident.setRules(rules);
-        if (accident.getId() == 0) {
-            accidents.save(accident);
-        } else {
-            accidents.update(accident);
-        }
+        accidents.save(accident);
         return "redirect:/";
     }
 
     @GetMapping("/update")
+    @Transactional
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", accidents.findAccidentById(id));
-        Collection<AccidentType> types = accidents.findAllTypes();
-        Collection<Rule> rules = accidents.findAllRules();
-        model.addAttribute("types", types);
-        model.addAttribute("rules", rules);
+        Accident accident = accidents.findById(id).orElse(
+                new Accident(0, "", "", "", AccidentType.of(1, "")));
+        Hibernate.initialize(accident.getRules());
+        Hibernate.initialize(accident.getType());
+        model.addAttribute("accident", accident);
+        List<AccidentType> typesList = new ArrayList<>();
+        types.findAll().forEach(typesList::add);
+        List<Rule> rulesList = new ArrayList<>();
+        rules.findAll().forEach(rulesList::add);
+        model.addAttribute("types", typesList);
+        model.addAttribute("rules", rulesList);
         return "accident/update";
     }
 }

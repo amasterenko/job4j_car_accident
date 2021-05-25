@@ -34,7 +34,7 @@ public class JdbcConfig {
         return new JdbcTemplate(ds);
     }
 
-    @Bean
+    //@Bean
     public PlatformTransactionManager txManager(DataSource ds) {
         return new DataSourceTransactionManager(ds);
     }
