@@ -32,6 +32,13 @@
                     <a class="nav-link" href="<c:url value='/create'/>">Create accident</a>
                 </li>
             </ul>
+            <ul class="nav float-right">
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<c:url value='/logout'/>">${pageContext.request.userPrincipal.name} | logout</a>
+                    </li>
+                </c:if>
+            </ul>
 
             <table class="table table-sm top-buffer text-center">
                 <thead>
