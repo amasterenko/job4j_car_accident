@@ -33,9 +33,9 @@
                 </li>
             </ul>
             <ul class="nav float-right">
-                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <c:if test="${user != null}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="<c:url value='/logout'/>">${pageContext.request.userPrincipal.name} | logout</a>
+                        <a class="nav-link" href="<c:url value='/logout'/>">${user.username} | logout</a>
                     </li>
                 </c:if>
             </ul>
