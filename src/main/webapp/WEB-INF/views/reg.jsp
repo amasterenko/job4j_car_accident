@@ -24,11 +24,11 @@
     <div class="row p-4">
         <div class="col-md-6 offset-md-3">
             <div class="row p-4">
-                <div class="col text-center"><h4>Login:</h4></div>
+                <div class="col text-center"><h4>Registration:</h4></div>
             </div>
 
             <div class="row justify-content-center">
-                <form action="<c:url value='/login'/>" method='POST'>
+                <form action="<c:url value='/reg'/>" method='POST'>
                     <c:if test="${not empty errorMessage}">
                         <div class="alert alert-warning d-flex align-items-center" role="alert">
                                 ${errorMessage}
@@ -44,16 +44,15 @@
                     <div class="row py-2">
                         <div class="col">
                             <label for="inputPwd">Password</label>
-                            <input type="password" name="password" id="inputPwd" class="form-control form-control-sm"
-                                   placeholder="password" required>
+                            <input type="text" name="password" id="inputPwd" class="form-control form-control-sm"
+                                   placeholder="password" minlength="6" required>
                         </div>
                     </div>
                     <div class="d-flex p-2 justify-content-center">
-                        <a href="<c:url value='/reg'/>"><small>Registration</small></a>
+                        <a href="<c:url value='/login'/>"><small>Login</small></a>
                     </div>
                     <div class="row py-2">
                         <div class="col">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             <button class="btn btn-lg btn-outline-dark btn-block" id="submit" type="submit">Submit
                             </button>
                         </div>
