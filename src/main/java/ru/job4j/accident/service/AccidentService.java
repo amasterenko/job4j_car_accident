@@ -1,44 +1,65 @@
 package ru.job4j.accident.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.AccidentRepository;
+import ru.job4j.accident.repository.RuleRepository;
+import ru.job4j.accident.repository.TypeRepository;
 
-import java.util.Collection;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AccidentService {
-    private AccidentMem rep;
+    private final AccidentRepository accidents;
+    private final TypeRepository types;
+    private final RuleRepository rules;
 
-    public AccidentService(AccidentMem rep) {
-        this.rep = rep;
+    public AccidentService(
+            AccidentRepository accidents,
+            TypeRepository types,
+            RuleRepository rules
+    ) {
+        this.accidents = accidents;
+        this.types = types;
+        this.rules = rules;
     }
 
-    public Collection<Accident> findAllAccidents() {
-        return rep.findAllAccidents();
-    }
-
-    public Accident save(Accident accident, String[] ruleIds) {
-        return rep.save(accident, Stream.of(ruleIds).mapToInt(Integer::parseInt).toArray());
+    public List<Accident> findAllAccidents() {
+        List<Accident> res = new ArrayList<>();
+        accidents.findAll().forEach(a -> {
+            Hibernate.initialize(a.getRules());
+            Hibernate.initialize(a.getType());
+            res.add(a);
+        });
+        return res;
     }
 
     public Accident findAccidentById(int id) {
-        return rep.findAccidentById(id);
+        Accident accident = accidents.findById(id).orElse(
+                new Accident(0, "", "", "", AccidentType.of(1, "")));
+        Hibernate.initialize(accident.getRules());
+        Hibernate.initialize(accident.getType());
+        return accident;
     }
 
-    public AccidentType findAccidentTypeById(int id) {
-        return rep.findTypeById(id);
+    public List<AccidentType> findAllTypes() {
+        List<AccidentType> res = new ArrayList<>();
+        types.findAll().forEach(res::add);
+        return res;
     }
 
-    public Collection<AccidentType> findAllTypes() {
-        return rep.findAllTypes();
+    public List<Rule> findAllRules() {
+        List<Rule> res = new ArrayList<>();
+        rules.findAll().forEach(res::add);
+        return res;
     }
 
-    public Collection<Rule> findAllRules() {
-        return rep.findAllRules();
+    public Accident saveAccident(Accident accident) {
+        accidents.save(accident);
+        return accident;
     }
 }
