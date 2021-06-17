@@ -11,11 +11,16 @@ ____
 * Travis CI 
 
 
-### Features:
+### Features
 - User's authentication  
 - Creating/updating accidents  
 
-### Configuration:
+### User interface  
+![registartion](img/accidents_main.png)  
+![registartion](img/accidents_new.png)  
+![registartion](img/accidents_login.png)  
+
+### Configuration
 Create a PostgreSQL database with the name _auto_crash_ and set the DB credentials to _./resources/app.properties_.  
 The default ones are :
 ```
@@ -29,7 +34,7 @@ hibernate.show_sql=true
 ```
 Run script _./db/scheme.sql_ on your DB.
 
-### Usage:
+### Usage
 
 1. Build the WAR file with:  
 ```
