@@ -36,7 +36,7 @@ Run script _./db/scheme.sql_ on your DB.
 
 ### Usage
 
-1. Build the WAR file with:  
+1. Build the WAR file with:   
 ```
 mvn clean package  
 ```
