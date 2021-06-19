@@ -1,23 +1,25 @@
 # Car accident
 [![Build Status](https://travis-ci.com/amasterenko/job4j_car_accident.svg?branch=master)](https://travis-ci.com/amasterenko/job4j_car_accident)    
 
-### Technologies  
-* Java Servlets/JSTL  
-* Spring (Web, JDBC, ORM, Data, Security)  
-* Hibernate
-* PostgreSQL
-* Maven
-* Travis CI 
-
-
 ### Features
 - User's authentication  
 - Creating/updating accidents  
 
+### Technologies
+* Java Servlets/JSTL
+* Spring (Web, JDBC, ORM, Data, Security)
+* Hibernate
+* PostgreSQL
+* Maven
+* Travis CI
+
+### DB Schema
+![registartion](img/db_schema.png)
+
 ### User interface  
 ![registartion](img/accidents_main.png)  
 ![registartion](img/accidents_new.png)  
-![registartion](img/accidents_login.png)  
+![registartion](img/accidents_login.png)
 
 ### Configuration
 Create a PostgreSQL database with the name _auto_crash_ and set the DB credentials to _./resources/app.properties_.  
